@@ -1,12 +1,11 @@
-//Jesiel Reyes
-//Ezra Stone
-//Ethan McKissic
-
+// Written by:
+// Jesiel Reyes
+// Ezra Stone
+// Ethan McKissic
 
 #include "spimcore.h"
 
-/* ALU */
-/* 10 Points */
+// ALU 
 void ALU(unsigned A,unsigned B,char ALUControl,unsigned *ALUresult,char *Zero)
 {
     switch (ALUControl) 
@@ -64,8 +63,7 @@ void ALU(unsigned A,unsigned B,char ALUControl,unsigned *ALUresult,char *Zero)
         *Zero = 1; 
 }
 
-/* instruction fetch */
-/* 10 Points */
+// Instruction fetch 
 int instruction_fetch(unsigned PC,unsigned *Mem,unsigned *instruction)
 {
     //If misaligned 
@@ -86,8 +84,7 @@ int instruction_fetch(unsigned PC,unsigned *Mem,unsigned *instruction)
 }
 
 
-/* instruction partition */
-/* 10 Points */
+//Instruction partition 
 void instruction_partition(unsigned instruction, unsigned *op, unsigned *r1,unsigned *r2, unsigned *r3, unsigned *funct, unsigned *offset, unsigned *jsec)
 {
     //Create designated bitmasks for each instruction 
@@ -122,8 +119,7 @@ void instruction_partition(unsigned instruction, unsigned *op, unsigned *r1,unsi
 }
 
 
-/* instruction decode*/
-/* 15 Points */
+// Instruction decode
 int instruction_decode(unsigned op,struct_controls *controls)
 {
     //initializes all controls to 0
@@ -228,8 +224,7 @@ int instruction_decode(unsigned op,struct_controls *controls)
     return 0;
 }
 
-/* Read Register*/
-/* 5 Points */
+// Read Register
 void read_register(unsigned r1,unsigned r2,unsigned *Reg,unsigned *data1,unsigned *data2)
 {
     //gets the values of the registers from the register array
@@ -238,8 +233,7 @@ void read_register(unsigned r1,unsigned r2,unsigned *Reg,unsigned *data1,unsigne
 }
 
 
-/* Sign Extend*/
-/* 10 Points */
+// Sign Extend
 void sign_extend(unsigned offset,unsigned *extended_value)
 {
     //if statement to determine if the offsett is negative
@@ -255,8 +249,7 @@ void sign_extend(unsigned offset,unsigned *extended_value)
     }
 }
 
-/* ALU operations */
-/* 10 Points */
+// ALU operations 
 int ALU_operations(unsigned data1,unsigned data2,unsigned extended_value,unsigned funct,char ALUOp,char ALUSrc,unsigned *ALUresult,char *Zero)
 {
     // Check for improper instruction
@@ -325,8 +318,7 @@ int ALU_operations(unsigned data1,unsigned data2,unsigned extended_value,unsigne
     return 0; // Operation successful
 }
 
-/* Read / Write Memory */
-/* 10 Points */
+//Read / Write Memory 
 int rw_memory(unsigned ALUresult,unsigned data2,char MemWrite,char MemRead,unsigned *memdata,unsigned *Mem)
 {
     unsigned mem_index = ALUresult >> 2;
@@ -348,8 +340,7 @@ int rw_memory(unsigned ALUresult,unsigned data2,char MemWrite,char MemRead,unsig
 }
 
 
-/* Write Register */
-/* 10 Points */
+// Write Register 
 void write_register(unsigned r2,unsigned r3,unsigned memdata,unsigned ALUresult,char RegWrite,char RegDst,char MemtoReg,unsigned *Reg)
 {
     if(RegWrite) {
@@ -365,8 +356,7 @@ void write_register(unsigned r2,unsigned r3,unsigned memdata,unsigned ALUresult,
     }
 }
 
-/* PC update */
-/* 10 Points */
+// PC update 
 void PC_update(unsigned jsec,unsigned extended_value,char Branch,char Jump,char Zero,unsigned *PC)
 {
     // Increments PC by 4 in memory, which should move it to the next instruction in the memory
